@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Mob.gd" type="Script" id=1]
+[ext_resource path="res://assets/Grinch.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 38.2175
+height = 102.083
+
+[sub_resource type="CapsuleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 65.1607
+height = 41.0112
+
+[node name="Mob" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+mob_type = "Grinch"
+
+[node name="HitTestTimer" type="Timer" parent="." index="0"]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = false
+autostart = true
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+texture = ExtResource( 2 )
+
+[node name="Physics" type="Area2D" parent="." index="2"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="Grinch" type="CollisionShape2D" parent="Physics" index="0"]
+
+position = Vector2( -7.18481, 1.19746 )
+shape = SubResource( 1 )
+
+[node name="Krampus" type="CollisionShape2D" parent="Physics" index="1"]
+
+position = Vector2( -2.39496, 0.598724 )
+shape = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="." index="3"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+_sections_unfolded = [ "playback" ]
+
+[node name="HitCooldown" type="Timer" parent="." index="4"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[connection signal="timeout" from="HitTestTimer" to="." method="hit"]
+
+[connection signal="body_entered" from="Physics" to="." method="hit"]
+
+[connection signal="timeout" from="HitCooldown" to="." method="_on_HitCooldown_timeout"]
+
+

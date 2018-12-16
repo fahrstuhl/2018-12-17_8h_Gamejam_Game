@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Item.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 32.471
+height = 69.1411
+
+[node name="Item" type="Node2D"]
+
+script = ExtResource( 1 )
+item_type = "Hat"
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="." index="1"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[node name="Physics" type="Area2D" parent="." index="2"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Cookie" type="CollisionShape2D" parent="Physics" index="0"]
+
+rotation = 1.35881
+shape = SubResource( 1 )
+
+[node name="Hat" type="CollisionPolygon2D" parent="Physics" index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( -58.3434, 30.8495, -46.9403, -18.8353, 1.11548, -58.746, 39.3972, -55.488, 51.6148, -48.9719, 61.3889, -53.859, 76.0499, -43.2704, 68.7194, -24.5368, 50.8003, -22.9078, 42.6552, -41.6414, 14.9621, -28.6093, 10.8895, 1.52734, 35.3247, 27.5915, 56.5018, 27.5915, 59.7598, 49.5831, 46.7277, 61.8007, -42.0533, 50.3976, -72.1899, 52.8411, -74.6334, 32.4785 )
+
+[node name="DespawnTimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 0.5
+one_shot = false
+autostart = false
+
+[connection signal="body_entered" from="Physics" to="." method="_on_Physics_body_entered"]
+
+[connection signal="timeout" from="DespawnTimer" to="." method="send_myself"]
+
+
