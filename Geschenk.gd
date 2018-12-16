@@ -4,10 +4,8 @@ var velocity = Vector2(0,0)
 var mouse_over = false
 
 func _ready():
-	# Connect the signals used to detect if the mouse is hovering:
 	$Area2D.connect("mouse_entered",self,"_mouse_over", [true])
 	$Area2D.connect("mouse_exited",self,"_mouse_over", [false])
-	# Enables the input detection:
 	set_process_unhandled_input(true)
 
 func _process(delta):

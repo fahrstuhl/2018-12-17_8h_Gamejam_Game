@@ -8,9 +8,6 @@ var velocity = Vector2(0,0)
 var health = 2
 enum {FOLLOWING, HIT}
 var state = FOLLOWING
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
 
 func _process(delta):
 	if health <= 0:
@@ -52,10 +49,6 @@ func hit(body):
 		$Tween.start()
 	elif body.name == "Player" and not state == HIT:
 		get_node("/root/World/Player").hit(mob_type)
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
 
 func _on_HitCooldown_timeout():
 	state = FOLLOWING

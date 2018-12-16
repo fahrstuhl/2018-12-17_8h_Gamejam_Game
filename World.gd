@@ -9,11 +9,6 @@ var item = preload("res://Item.tscn")
 func _ready():
 	Network.connect("object_received", self, "add_object")
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
-
 func add_object(object_dict):
 	var name = object_dict["name"]
 	var sprite

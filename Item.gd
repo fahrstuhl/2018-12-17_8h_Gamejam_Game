@@ -5,10 +5,6 @@ var velocity = Vector2(0,0)
 var start_timer = false
 signal collected
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-
 func _ready():
 	$Sprite.texture = ImageTexture.new()
 	$Sprite.texture.load("res://assets/"+item_type+".png")

@@ -4,10 +4,6 @@ export(String,"Krampus","Grinch") var debris_type
 
 var velocity = Vector2(0,0)
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-
 func _ready():
 	$Tween.interpolate_property(self, "velocity", velocity, velocity*0.1, 2, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	$Tween.start()
@@ -19,9 +15,6 @@ func _ready():
 
 func _process(delta):
 	position += velocity
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
 
 func send_myself():
 	var object_dict = {
